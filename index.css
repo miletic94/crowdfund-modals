@@ -1,0 +1,364 @@
+@import url('https://fonts.googleapis.com/css2?family=Commissioner&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Commissioner:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Commissioner:wght@400;500;700&display=swap');
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+    box-sizing: border-box;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* =============================== */
+
+
+
+.hero {
+    height: 400px;
+    background: url("images/image-hero-desktop.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+    align-items: center;
+    height: 128px;
+    background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0.0001) 100%);
+}
+.nav-group {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+.menu {
+    width: 100%;
+    max-width: 225px;
+    display: flex;
+    justify-content: space-between;
+}
+#hamburger, #exit {
+    display: none;
+}
+#dropdown {
+    display:none;
+    flex-direction: column;
+    z-index: 1;
+    background-color: var(--light-color);
+    width: 100%;
+    padding: 0 2.4rem;
+    position: absolute;
+    max-width: 730px;
+    top:128px;
+}
+#dropdown a {
+    padding: 2.4rem;
+    border-bottom: solid 1px rgba(47, 47, 47, 0.1)
+} 
+#dropdown a:last-child {
+    border-bottom:none;
+}
+a {
+    display: inline-block;
+    text-decoration: none;
+    text-transform: capitalize;
+}
+a:hover {
+    cursor:pointer;
+    text-decoration: underline;
+}
+main {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translateY(-14vh);
+    margin: 2.4rem;
+}
+section {
+    width:100%;
+    max-width: 730px;
+    padding: 48px;
+    margin: 2.4rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 8px
+}
+section > img {
+    transform: translateY(-50%);
+    margin-top: -48px /* Annulate section padding o 48 */
+}
+.btn-group {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.btn-group {
+    margin-top: 16px;
+}
+
+progress {
+    margin-top: 40px;
+    border-radius: 33.5rem; 
+    height: 1.2rem;
+}
+progress::-webkit-progress-bar {
+background-color: rgba(47, 47, 47, 0.2);
+border-radius: 33.5rem;
+}
+progress::-webkit-progress-value {
+background-color: rgba(60, 179, 171, 1);
+border-radius: 33.5rem;
+}
+progress::-moz-progress-bar {
+border-radius: 33.5rem;
+background-color: rgba(60, 179, 171, 1);
+}
+
+p {
+    margin: 2.4rem 0;
+}
+button {
+    display: flex;
+    align-items: center;
+}
+button:hover {
+    cursor: pointer;
+}
+.btn-primary:hover {
+    background-color: #147A73;
+}
+.btn-secondary:hover {
+    opacity: 0.8;
+}
+.summary {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-self: flex-start;
+}
+progress {
+    width: 100%;
+    /* max-width: 634px; */
+}
+section.justify-left {
+    align-items: flex-start;
+}
+section.padding-bottom-0 {
+    padding-bottom: 0;
+}
+.option-card {
+    padding: 32px;
+    margin: 2.4rem 0;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+}
+.option-card.disabled {
+    opacity: 0.5;
+}
+.option-card-header, .option-card-footer {
+    display: flex; 
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Typography */
+
+html, body, button, a {
+    font-size: 10px;
+    font-family: 'Commissioner', sans-serif;
+}
+h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 3.4rem;
+    letter-spacing: 0px;
+    text-align: center;
+}
+h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 2.4rem;
+    text-align: center;
+}
+h3 {
+    font-size: 1.8rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 2.2rem;
+    letter-spacing: 0px;
+    text-align: left;
+}
+p {
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 3rem;
+    text-align: left;
+}
+a {
+    font-size: 1.3rem;
+    font-weight: 500;
+    line-height: 1.6rem;
+}
+button {
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 2rem;
+}
+.summary-number {
+    font-size: 3.2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 3.9rem;
+}
+.summary-text {
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.8rem;
+}
+.option-card-header aside {
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.8rem;
+}
+#dropdown a {
+    font-size: 1.8rem;
+    font-weight: 500;
+    line-height: 2.2rem;
+}
+/*============*/
+
+/* Buttons */
+button {
+    border-radius: 56px;
+    padding: 17px 40px;
+    outline: 0;
+    border: 0;
+}
+button svg {
+    /* Annulate button padding of 17px 40px and add space between image and text*/
+    margin: -17px 16px -17px -40px;
+}
+
+/* Colors */ 
+
+:root {
+    --primary-color: rgba(60, 179, 171, 1);
+    --secondary-color: rgba(47, 47, 47, 0.1);
+    --ternary-color: rgba(250, 250, 250, 1);
+    --light-color: rgba(255, 255, 255, 1);
+
+    --text-color-light: rgba(122, 122, 122, 1);
+}
+
+body {
+    background-color: var(--ternary-color);
+}
+section {
+    background-color: var(--light-color);
+}
+button {
+    background-color: var(--primary-color);
+}
+.btn-secondary {
+    background-color: var(--secondary-color);
+}
+button, a {
+    color: var(--light-color)
+}
+#dropdown a {
+    color: black;
+}
+.btn-secondary, p {
+    color: var(--text-color-light)
+}
+.option-card-header aside {
+    color: var(--primary-color);
+}
+.option-card.disabled button {
+    background-color: var(--text-color-light);
+}
+
+/* Toggle Bookmark button */
+.green {
+    color: var(--primary-color);
+    fill: var(--primary-color)
+}
+.light {
+    color: var(--light-color);
+    fill: var(--light-color)
+}
+.light-green {
+    background-color: rgba(20, 122, 115, 0.1);
+}
+
+@media screen and (max-width:700px) {
+    .hero {
+        background: url("images/image-hero-mobile.jpg");
+        padding: 0 2.4rem;
+    }
+
+    nav {
+        width: 100%;
+        max-width: 730px;
+        justify-content: space-between;
+    }
+    #hamburger {
+        display: block;
+    }
+    .menu {
+        display:none; 
+    }
+}
