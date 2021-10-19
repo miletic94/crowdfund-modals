@@ -19,7 +19,7 @@ table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed, 
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+time, mark, audio, video, main {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -30,7 +30,7 @@ time, mark, audio, video {
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
+footer, header, hgroup, menu, nav, section, main {
 	display: block;
 }
 body {
@@ -83,19 +83,43 @@ nav {
     display: flex;
     justify-content: space-between;
 }
+
 #hamburger, #exit {
     display: none;
 }
-#dropdown {
+.d-none {
     display:none;
+}
+#dropdown-container {
+    display:none;
+    flex-direction: column;
+    align-items: center;
+    position:fixed;
+    left:0;
+    top:0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.8), transparent);
+    padding: 0 5vw;
+}
+#dropdown-header {
+    height: 128px;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 730px;
+    justify-content: space-between;
+}
+#dropdown {
+    display:flex;
     flex-direction: column;
     z-index: 1;
     background-color: var(--light-color);
     width: 100%;
-    padding: 0 2.4rem;
-    position: absolute;
     max-width: 730px;
-    top:128px;
+    height: fit-content;
 }
 #dropdown a {
     padding: 2.4rem;
@@ -114,12 +138,11 @@ a:hover {
     text-decoration: underline;
 }
 main {
-    width: 90%;
+    margin: 0 5vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     transform: translateY(-14vh);
-    margin: 2.4rem;
 }
 section {
     width:100%;
@@ -135,35 +158,39 @@ section {
 }
 section > img {
     transform: translateY(-50%);
-    margin-top: -48px /* Annulate section padding o 48 */
+    margin-top: -4.8rem /* Annulate section padding of 48 */
 }
 .btn-group {
-    width: 100%;
+
     display: flex;
     justify-content: space-between;
 }
 .btn-group {
     margin-top: 16px;
 }
-
+.align-center {
+    display:flex;
+    align-items: center;
+}
 progress {
     margin-top: 40px;
     border-radius: 33.5rem; 
-    height: 1.2rem;
 }
 progress::-webkit-progress-bar {
-background-color: rgba(47, 47, 47, 0.2);
-border-radius: 33.5rem;
+    background-color: rgba(47, 47, 47, 0.2);
+    border-radius: 33.5rem;
 }
 progress::-webkit-progress-value {
-background-color: rgba(60, 179, 171, 1);
-border-radius: 33.5rem;
+    background-color: rgba(60, 179, 171, 1);
+    border-radius: 33.5rem;
 }
 progress::-moz-progress-bar {
-border-radius: 33.5rem;
-background-color: rgba(60, 179, 171, 1);
+    border-radius: 33.5rem;
+    background-color: rgba(60, 179, 171, 1);
 }
-
+section aside ~ hr {
+    opacity: 0.3;
+}
 p {
     margin: 2.4rem 0;
 }
@@ -202,15 +229,155 @@ section.padding-bottom-0 {
     border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 8px;
 }
-.option-card.disabled {
+.disabled {
     opacity: 0.5;
+}
+.disabled:hover {
+    cursor:unset;    
 }
 .option-card-header, .option-card-footer {
     display: flex; 
     justify-content: space-between;
+}
+.option-card-header {
+    align-items: baseline;
+}
+.option-card-footer {
     align-items: center;
 }
 
+.modal-container {
+    position: fixed;
+    top: 0;
+    left:0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5)
+}
+
+.modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4.8rem;
+    background-color: var(--light-color);
+    position: relative;
+}
+.close-modal {
+    position:absolute;
+    top: 32px;
+    right: 32px;
+    cursor:pointer;
+}
+.selection-modal {
+    display: flex;
+    justify-content: space-between;
+    max-width: 730px;
+    height: calc(100vh - 158px);
+    margin-top: 128px;
+    overflow: scroll;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+}
+label:hover {
+    cursor:pointer;
+}
+:checked ~ .selected-pledge {
+    display: flex;
+}
+.success-modal {
+    display: none;
+    max-width: 540px;
+}
+
+.success-modal img {
+    margin:  0 0 4.8rem 0
+}
+
+.modal-option-card {
+    display: grid;
+    grid-template-areas: "modal-option-radio    modal-option-header        modal-option-left"
+                         "modal-option-radio    modal-option-paragraph     modal-option-paragraph"
+                         "selected-pledge       selected-pledge            selected-pledge";
+
+    padding: 3.2rem 2.4rem;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.modal-option-radio {
+    grid-area: modal-option-radio;
+}
+.modal-option-header {
+    grid-area: modal-option-header;
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    justify-content: space-between;
+}
+.modal-option-paragraph {
+    grid-area: modal-option-paragraph;
+}
+.modal-option-left {
+    grid-area: modal-option-left;
+    justify-self: right;
+}
+.selected-pledge {
+    grid-area: selected-pledge;
+}
+
+.modal-option-card p {
+    margin: 1.7rem 0 0 0;
+}
+.selection-modal input[type="radio"] {
+    margin-right: 2.4rem;
+}
+:checked ~ .selected-pledge {
+    display: flex;
+}
+.selected-pledge {
+    border-top:solid 1px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 578px;
+    display: none;
+    justify-content: space-between;
+    align-items: baseline;
+    justify-self: center;
+    margin-top: 3.2rem;
+}
+/* TODO: SOLVE THIS */
+.selected-pledge .btn-group div::before {
+    content: "$";
+    position:relative;
+    left: 2.4rem;
+}
+.selected-pledge input {
+    width: 100%;
+    max-width: 100px;
+    height: 4.8rem;
+    margin-right: 0.8rem;
+    border-radius: 3.33rem;
+    border: solid 1px var(--primary-color);
+    outline:none;
+    text-align: center;
+}
+
+
+
+.selected-pledge input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+.selected-pledge input:focus {
+    border: solid 1px var(--primary-color);
+    outline: solid 1px var(--primary-color);
+}
+.selected-pledge button {
+    padding: 1.5rem 2.4rem;
+
+}
 /* Typography */
 
 html, body, button, a {
@@ -278,6 +445,60 @@ button {
     font-weight: 500;
     line-height: 2.2rem;
 }
+
+.modal-container h1 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 2.9rem;
+}
+.modal-container h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.9rem;
+}
+.success-modal p {
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 2.8rem;
+}
+
+.selection-modal h1, .selection-modal > p {
+    width: 100%;
+    text-align: left;
+}
+
+.modal-option-card p {
+    font-size: 1.5rem;
+    line-height: 2.8rem;
+}
+
+.summary-number-small {
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 2.2rem;
+    padding: 0.8rem;
+}
+.summary-text-small {
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.8rem;
+}
+.selected-pledge div {
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 2.8rem;
+}
+.selected-pledge input {
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1.7rem;
+}
+.selected-pledge button {
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1.7rem;
+}
+
 /*============*/
 
 /* Buttons */
@@ -330,6 +551,9 @@ button, a {
 .option-card.disabled button {
     background-color: var(--text-color-light);
 }
+.selected-pledge div {
+    color: var(--text-color-light)
+}
 
 /* Toggle Bookmark button */
 .green {
@@ -344,21 +568,75 @@ button, a {
     background-color: rgba(20, 122, 115, 0.1);
 }
 
+
+/* General */
+.width-100 {
+    width: 100%;
+}
+
 @media screen and (max-width:700px) {
     .hero {
         background: url("images/image-hero-mobile.jpg");
-        padding: 0 2.4rem;
     }
 
     nav {
+        padding: 0 5vw;
         width: 100%;
         max-width: 730px;
         justify-content: space-between;
     }
-    #hamburger {
+    #hamburger, #exit {
         display: block;
     }
     .menu {
         display:none; 
+    }
+    section {
+        padding: 2.4rem;
+    }
+    section > img {
+        margin-top: -2.4rem; /* Annulate section padding of 24 px */
+    }
+    section aside {
+        text-align: center;
+        margin-bottom: 2.4rem;
+    } 
+    progress {
+        margin-top: 0;
+    }
+    section aside ~ hr {
+        min-width: 8rem;
+    }
+    .btn-group {
+        align-items: center;
+    }
+    #bookmark {
+        padding: 0;
+        width: 56px; /* widht of child icon */
+        height: 56px;
+    }
+    #bookmark div {
+        display: none;
+    }
+    #bookmark > svg {
+        margin: 0;
+    }
+    .summary {
+        flex-direction: column;
+        align-items: center;
+        align-self: unset;
+    }
+    .summary aside {
+        text-align: center;
+    }
+    .option-card-header, .option-card-footer {
+        flex-direction: column;
+        align-items: baseline;
+    }
+    .option-card-header > h3 {
+        margin-bottom: 0.8rem;
+    }
+    .option-card-footer > div {
+        margin-bottom: 2.4rem;
     }
 }
