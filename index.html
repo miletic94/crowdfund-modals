@@ -56,7 +56,7 @@
           A beautiful & handcrafted monitor stand to reduce neck and eye strain.
         </p>
         <div class="btn-group width-100">
-          <button value="pledge-0" class="btn-primary" onclick="openModal(event)">
+          <button value="pledge-0" class="btn-primary" onclick="openModal(event, 'selection-modal')">
             Back this project
           </button>
           <button id="bookmark" class="btn-secondary" onclick="toggleBookmark()">
@@ -68,16 +68,16 @@
       <section class="align-cneter">
         <div class="summary">
           <aside>
-            <div class="summary-number">
-              $89,914
+            <div data-backed-fund class="summary-number">
+              89,914
             </div>
-            <div class="summary-text">
+            <div data-desired-fund class="summary-text">
               of $100,000 backed
             </div>
           </aside>
           <hr />
           <aside>
-            <div class="summary-number">
+            <div data-total-backers class="summary-number">
               5,007
             </div>
             <div class="summary-text">
@@ -111,7 +111,7 @@
           to allow notepads, pens, and USB sticks to be stored under the stand.
         </p>
         <div class="options">
-          <div class="option-card">
+          <div data-pledge-left-parent class="option-card">
             <div class="option-card-header">
               <h3>
                 Bamboo Stand
@@ -126,20 +126,20 @@
             </p>
             <div class="option-card-footer">
               <div>
-                <span class="summary-number">
+                <span data-pledge-left="25" class="summary-number">
                   101
                 </span>
                 <span class="summary-text">
                   left
                 </span>
               </div>
-              <button value="pledge-25" class="btn-primary" onclick="openModal(event)">
+              <button value="pledge-25" class="btn-primary" onclick="openModal(event, 'selection-modal')">
                 Select Reward
               </button>
             </div>
           </div>
 
-          <div class="option-card">
+          <div data-pledge-left-parent class="option-card">
             <div class="option-card-header">
               <h3>
                 Black Edition Stand
@@ -154,19 +154,19 @@
             </p>
             <div class="option-card-footer">
               <div>
-                <span class="summary-number">
+                <span data-pledge-left="75" class="summary-number">
                   64 
                 </span>
                 <span class="summary-text">
                   left
                 </span>
               </div>
-              <button value="pledge-75" class="btn-primary" onclick="openModal(event)">
+              <button value="pledge-75" class="btn-primary" onclick="openModal(event, 'selection-modal')">
                 Select Reward
               </button>
             </div>
           </div>
-          <div class="option-card disabled">
+          <div data-pledge-left-parent class="option-card">
             <div class="option-card-header">
               <h3>
                 Mahogany Special Edition
@@ -182,14 +182,14 @@
             </p>
             <div class="option-card-footer">
               <div>
-                <span class="summary-number">
+                <span data-pledge-left="200" class="summary-number">
                   0 
                 </span>
                 <span class="summary-text">
                   left
                 </span>
               </div>
-              <button value="pledge-200" class="btn-primary disabled" disabled>
+              <button value="pledge-200" class="btn-primary" onclick="openModal(event, 'selection-modal')">
                 Out of Stock
               </button>
             </div>
@@ -211,7 +211,10 @@
           </p>
       
           <label for="pledge-0" class="modal-option-card">
-            <input id="pledge-0" class="modal-option-radio" type="radio" name="pledge-type" />
+            <input id="pledge-0" class="modal-option-radio" 
+                   type="radio" name="pledge-type" 
+                   onclick="styleCheckedLabel(event.target)" />
+
             <div class="modal-option-header">
               <h2>
                 Pledge with no reward
@@ -232,9 +235,9 @@
               </div>
               <div class="btn-group">
                 <div>
-                  <input type="number" value="0" placeholder/>
+                  <input type="number" data-pledge-input-0 value="0" placeholder/>
                 </div>
-                <button class="btn-primary">
+                <button class="btn-primary continue-handler">
                   Continue
                 </button>
               </div>
@@ -242,8 +245,14 @@
             </div>
           </label>
 
-          <label for="pledge-25" class="modal-option-card">
-            <input id="pledge-25" class="modal-option-radio" type="radio" name="pledge-type" />
+          <label data-pledge-left-parent for="pledge-25" class="modal-option-card">
+            <input id="pledge-25" 
+                   class="modal-option-radio" 
+                   type="radio" 
+                   name="pledge-type" 
+                   onclick="styleCheckedLabel(event.target)"
+                   />
+
             <div class="modal-option-header">
               <h2>
                 Bamboo Stand
@@ -253,7 +262,12 @@
               </aside>
             </div>
             <div class="modal-option-left">
-              <span class="summary-number-small">101</span> <span class="summary-text-small">left</span>
+              <span data-pledge-left="25" class="summary-number-small">
+                101
+              </span> 
+              <span class="summary-text-small">
+                left
+              </span>
             </div>
             <p class="modal-option-paragraph">
               You get an ergonomic stand made of natural bamboo. You've helped us launch our promotional campaign, and you’ll be added to a special Backer member list.
@@ -264,9 +278,9 @@
               </div>
               <div class="btn-group">
                 <div>
-                  <input type="number" value="25" placeholder/>
+                  <input type="number" data-pledge-input-25 value="25" placeholder/>
                 </div>
-                <button class="btn-primary">
+                <button class="btn-primary continue-handler">
                   Continue
                 </button>
               </div>
@@ -274,8 +288,13 @@
             </div>
           </label>
           
-          <label for="pledge-75" class="modal-option-card">
-            <input id="pledge-75" class="modal-option-radio" type="radio" name="pledge-type" />
+          <label data-pledge-left-parent for="pledge-75" class="modal-option-card">
+            <input id="pledge-75" 
+                   class="modal-option-radio" 
+                   type="radio" 
+                   name="pledge-type" 
+                   onclick="styleCheckedLabel(event.target)"/>
+
             <div class="modal-option-header">
               <h2>
                 Black Edition Stand
@@ -285,7 +304,12 @@
               </aside>
             </div>
             <div class="modal-option-left">
-              <span class="summary-number-small">64</span> <span class="summary-text-small">left</span>
+              <span data-pledge-left="75" class="summary-number-small">
+                64
+              </span> 
+              <span class="summary-text-small">
+                left
+              </span>
             </div>
             <p class="modal-option-paragraph">
               You get a Black Special Edition computer stand and a personal thank you. You’ll be added to our Backer member list. Shipping is included.
@@ -299,9 +323,9 @@
               </div>
               <div class="btn-group">
                 <div>
-                  <input type="number" value="75" placeholder/>
+                  <input type="number" data-pledge-input-75 value="75" placeholder/>
                 </div>
-                <button class="btn-primary">
+                <button class="btn-primary continue-handler">
                   Continue
                 </button>
               </div>
@@ -309,7 +333,7 @@
             </div>
           </label>
 
-          <label for="pledge-200" class="modal-option-card disabled">
+          <label data-pledge-left-parent for="pledge-200" class="modal-option-card disabled">
             <input id="pledge-200" class="modal-option-radio" type="radio" name="pledge-type" disabled/>
             <div class="modal-option-header">
               <h2>
@@ -320,7 +344,12 @@
               </aside>
             </div>
             <div class="modal-option-left">
-              <span class="summary-number-small">0</span> <span class="summary-text-small">left</span>
+              <span data-pledge-left="200" class="summary-number-small">
+                0
+              </span> 
+              <span class="summary-text-small"> 
+                left
+              </span>
             </div>
             <p class="modal-option-paragraph">
               You get two Special Edition Mahogany stands, a Backer T-Shirt, and a personal thank you. You’ll be added to our Backer member list.  Shipping is included.
@@ -331,9 +360,9 @@
               </div>
               <div class="btn-group">
                 <div>
-                  <input type="number" value="200" placeholder/>
+                  <input type="number" data-pledge-input-200 value="200" placeholder/>
                 </div>
-                <button class="btn-primary">
+                <button class="btn-primary continue-handler">
                   Continue
                 </button>
               </div>
@@ -395,7 +424,7 @@
           Your pledge brings us one step closer to sharing Mastercraft Bamboo Monitor Riser worldwide. You will get
           an email once our campaign is completed.
         </p>
-        <button >
+        <button class="btn-primary" onclick="closeModal()">
           Got it!
         </button>
       </div>
@@ -407,10 +436,12 @@
       <summary>134</summary>
       <p>asdklfjlasjdfljdaslf</p>
     </details >
-
+    <!-- <script type="module" src="scripts/consts.js"></script> -->
     <script src="scripts/toggleBookmark.js"></script>
     <script src="scripts/toggleDropdown.js"></script>
     <script src="scripts/toggleModal.js"> </script>
+    <script type="module" src="scripts/fundingTracker.js"></script>
+    <script type="module" src="scripts/validateInput.js"></script>
   </div>
 </body>
 </html>

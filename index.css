@@ -180,7 +180,7 @@ progress::-webkit-progress-bar {
     background-color: rgba(47, 47, 47, 0.2);
     border-radius: 33.5rem;
 }
-progress::-webkit-progress-value {
+ progress::-webkit-progress-value {
     background-color: rgba(60, 179, 171, 1);
     border-radius: 33.5rem;
 }
@@ -252,7 +252,7 @@ section.padding-bottom-0 {
     left:0;
     width: 100vw;
     height: 100vh;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     background: rgba(0, 0, 0, 0.5)
@@ -274,7 +274,7 @@ section.padding-bottom-0 {
     cursor:pointer;
 }
 .selection-modal {
-    display: flex;
+    display: none;
     justify-content: space-between;
     max-width: 730px;
     height: calc(100vh - 158px);
@@ -289,6 +289,7 @@ label:hover {
 :checked ~ .selected-pledge {
     display: flex;
 }
+
 .success-modal {
     display: none;
     max-width: 540px;
@@ -306,6 +307,7 @@ label:hover {
 
     padding: 3.2rem 2.4rem;
     border: 1px solid rgba(0, 0, 0, 0.05);
+    margin: 1.2rem 0;
 }
 
 .modal-option-radio {
@@ -334,6 +336,9 @@ label:hover {
 }
 .selection-modal input[type="radio"] {
     margin-right: 2.4rem;
+}
+:checked ~ label {
+    border: solid green;
 }
 :checked ~ .selected-pledge {
     display: flex;
@@ -568,12 +573,38 @@ button, a {
     background-color: rgba(20, 122, 115, 0.1);
 }
 
-
+.modal-option-card input[type="radio"] {
+    -webkit-appearance: none;
+    border:solid 2px rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 2.4rem;
+    position: relative;
+    width: 20px;
+    height: 20px;
+}
+.modal-option-card input[type="radio"]::after {
+    box-sizing: border-box;
+    content: "";
+    width: 12px;
+    height: 12px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    position:absolute;
+    opacity:0;
+}
+.modal-option-card input[type="radio"]:checked::after {
+    opacity: 1 ;
+}
 /* General */
 .width-100 {
     width: 100%;
 }
-
+.green-border {
+    border: 2px solid rgba(60, 179, 171, 1)
+}
 @media screen and (max-width:700px) {
     .hero {
         background: url("images/image-hero-mobile.jpg");
