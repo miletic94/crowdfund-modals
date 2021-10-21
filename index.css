@@ -699,6 +699,9 @@ button, a {
     .summary aside {
         text-align: center;
     }
+    .option-card {
+        padding: 0 2.2vw;
+    }
     .option-card-header, .option-card-footer {
         flex-direction: column;
         align-items: baseline;
@@ -716,7 +719,7 @@ button, a {
     }
     .selection-modal {
         margin: 0 5vw;
-        padding: 10vw;
+        padding: 8vw;
         height: calc(100% - 50px) ;
     }
     .success-modal {
