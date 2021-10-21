@@ -1,5 +1,8 @@
 import {pledgeLeft25TextElements, pledgeLeft75TextElements, pledgeLeft200TextElements} from "./consts.js"
 import {pledgeLeftParentElements} from "./consts.js"
+import { continueHandlers as fundHandlers } from "./consts.js"
+import { progressElement } from "./consts.js"
+import { openModal, closeModal } from "./toggleModal.js"
 // import {pledge0InputElement, pledge25InputElement, pledge75InputElement, pledge200InputElement} from "./consts.js"
 import {backedFundTextElement, desiredFundTextElement, totalBackersTextElement} from "./consts.js"
 
@@ -17,6 +20,7 @@ class FundingTracker {
         this.#pledgeLeft25 = 0
         this.#pledgeLeft75 = 0
         this.#pledgeLeft200 = 0
+        this.#backedFund = 0
     }
 
     set pledgeLeft25(ammount) {
@@ -31,13 +35,38 @@ class FundingTracker {
         /* Some checkings */
         this.#pledgeLeft200 = ammount
     }
-    fundProject(pledgeLeftType, ammount) {
-        this.pledgeReward(pledgeLeftType)
-        this.addToFund(ammount)
+
+    fundProject(pledgeType, ammount) {
+        if(this.isNotFunded()) {
+            console.log(this.isNotFunded())
+            this.fundingExecuted = false
+            if(this.minmaxChecker(pledgeType)) {
+                this.pledgeReward(pledgeType)
+                this.addToFund(parseInt(ammount))
+                this.updateTotalBackersNumber()
+                this.updateProgressElementValue(progressElement)
+                this.fundingExecuted = true
+            }
+            return
+        }
+        console.log("Project is already funded. Thank you for support.")
     }
-    /* NIJE DOBRO */
-    pledgeReward(pledgeLeftType) {
-        switch (pledgeLeftType) {
+    minmaxChecker(pledgeType) {
+        let pledgeInputElement = document.querySelector(`[data-pledge-input='${pledgeType}']`)
+        const min = parseInt(pledgeType)
+        const pledgeInputValue = parseInt(pledgeInputElement.value)
+        if(pledgeInputValue <= 0) {
+            console.log("Not possible value. Please, try somethinig else")
+            return false
+        }
+        if (pledgeInputValue < min) {
+            console.log(`Pledge too small for this reward. You should try other type of pledge`)
+            return false
+        }
+        return true
+    } 
+    pledgeReward(pledgeType) {
+        switch (pledgeType) {
             case "25":
                 this.#pledgeLeft25 -= 1
                 pledgeLeft25TextElements.forEach(element => element.innerText = this.#pledgeLeft25)
@@ -72,45 +101,63 @@ class FundingTracker {
         return this.#backedFund
     }
 
-    get totalBakcers() {
+    get totalBackers() {
         return this.#totalBackers
+    }
+    set totalBackers(amount) {
+        this.#totalBackers = amount 
     }
 
     isNotFunded() {
-        return this.backedFund < this.desiredFund
+       return this.backedFund < this.desiredFund
+        
     }
 
     addToFund(ammount) {
-        if(this.isNotFunded()) {
-            if(this.backedFund + ammount > this.desiredFund) {
-                console.log(`Ammount is too big. You will overfund project. Wee need $${this.desiredFund - this.backedFund} more`)
-                return
-            }
-            this.#backedFund += ammount
-            return 
+        if(this.backedFund + parseInt(ammount) > this.desiredFund) {
+            console.log(`Ammount is too big. You will overfund project. Wee need $${this.desiredFund - this.backedFund} more`)
+            return
         }
-        console.log("Project is funded!")
+        this.#backedFund += parseInt(ammount)
+        this.updaateBackedFundTextElement(backedFundTextElement)
+        return 
     }
 
+    updaateBackedFundTextElement(backedFundTextElement) {
+        backedFundTextElement.innerText = `$${this.backedFund}`
+    }
+    updateTotalBackersNumber() {
+        this.totalBackers += 1
+        console.log(this.totalBackers)
+        this.updateTotalBackersNumberTextElement(totalBackersTextElement)
+    }
+    updateTotalBackersNumberTextElement(totalBackersTextElement) {
+        totalBackersTextElement.innerText = this.totalBackers
+    }
+    updateProgressElementValue(progressElement) {
+        progressElement.value = this.backedFund
+    }
     styleZeroRewardsElement(elements) {
         elements.forEach(element => {
             if(element.querySelector("[data-pledge-left]").innerText === "0") {
                 element.querySelector("button").disabled = true
                 element.classList.add("disabled")
+                element.dataset.outlineChecked = false
             }
         })
     }
 }
 
-let fundingTracker = new FundingTracker(100, 99, 5007)
+let fundingTracker = new FundingTracker(1000, 0, 5007)
 fundingTracker.pledgeLeft25 = 101
 fundingTracker.pledgeLeft75 = 64
 fundingTracker.pledgeLeft200 = 0
-console.log(fundingTracker.backedFund)
 
 backedFundTextElement.innerText = `$${fundingTracker.backedFund}`
 desiredFundTextElement.innerText = `of $${fundingTracker.desiredFund} backed`
-totalBackersTextElement.innerText = fundingTracker.totalBakcers
+totalBackersTextElement.innerText = fundingTracker.totalBackers
+progressElement.value = fundingTracker.backedFund
+progressElement.max = fundingTracker.desiredFund
 
 pledgeLeft25TextElements.forEach(element => {
     element.innerText = fundingTracker.pledgeLeft25
@@ -122,7 +169,15 @@ pledgeLeft200TextElements.forEach(element => {
     element.innerText = fundingTracker.pledgeLeft200
 })
 
+fundHandlers.forEach(element => {   
+    element.addEventListener("click", (event) => {
+
+        fundingTracker.fundProject(element.dataset.fund, element.previousElementSibling.querySelector("input").value) /* Ovo da ne zavisi od strukture HTML-a */
+        if(fundingTracker.fundingExecuted) {
+            closeModal()
+            openModal(event, "success-modal")
+        }
+    })
+})
+
 fundingTracker.styleZeroRewardsElement(pledgeLeftParentElements)
-fundingTracker.fundProject("75", 1)
-console.log(fundingTracker.pledgeLeft75)
-console.log(fundingTracker.backedFund)

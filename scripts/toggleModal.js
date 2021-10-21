@@ -1,28 +1,12 @@
-let continueHandlers = [...document.querySelectorAll(".continue-handler")]
-
-const openModal = (event, modal) => {
+import { continueHandlers, openModalButtons, closeModalButtons } from "./consts.js"
+import {pledgeLeftParentElements as checkedParentElement} from "./consts.js"
+export const openModal = (event, modal) => {
     let modalContainer = document.querySelector(".modal-container")
     let checkingParameter
     let targetModalBox 
     if(modal === "selection-modal") {
         let checked
-        switch (event.target.value) {
-            case "pledge-0":
-                checkingParameter = "pledge-0"
-                break;
-            case "pledge-25":
-                checkingParameter = "pledge-25"
-                break; 
-            case "pledge-75":
-                checkingParameter = "pledge-75"
-                break;   
-            case "pledge-200":
-                checkingParameter = "pledge-200"
-                break;
-            default:
-                checkingParameter = "pledge-0"
-                break;
-        }
+        checkingParameter = event.target.value
         checked = document.querySelector(`#${checkingParameter}`)
         checked.checked = true;
         styleCheckedLabel(checked)
@@ -36,29 +20,44 @@ const openModal = (event, modal) => {
     
 }
 
-
-
-const closeModal = () => {
+export const closeModal = () => {
     document.querySelector(".modal-container").style.display = "none"
     document.querySelector(".selection-modal").style.display = "none"
     document.querySelector(".success-modal").style.display = "none"
 }
 
-
 const styleCheckedLabel = (checked) => {
-    let labels = document.querySelectorAll("label")
-    for (label of labels) {
-        label.classList.remove("green-border")
-    }
+    checkedParentElement.forEach(element => {
+        element.classList.remove("green-border")
+    })
     let checkedLabel = checked.parentElement
-    checkedLabel.classList.add("green-border")
+    if(checkedLabel.dataset.outlineChecked) {
+        checkedLabel.classList.add("green-border")
+    }
 }
 
-continueHandlers.forEach(continueHandler => {
-    continueHandler.addEventListener("click", () => {
-        closeModal()
-        openModal("click", "success-modal")
+openModalButtons.forEach(openModalButton => {
+    openModalButton.addEventListener("click", (event) => {
+        openModal(event, "selection-modal")
     })
 })
 
+closeModalButtons.forEach(closeModalButton => {
+    closeModalButton.addEventListener("click", () => {
+        closeModal()
+    })
+})
 
+checkedParentElement.forEach(element => {
+    if(element.dataset.outlineChecked) {
+        element.querySelector("input").addEventListener("click", (event) => {
+            styleCheckedLabel(event.target)
+        })
+    }
+})
+
+continueHandlers.forEach(continueHandler => {
+    continueHandler.addEventListener("click", (event) => {
+        
+    })
+})

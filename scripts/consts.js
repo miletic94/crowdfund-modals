@@ -15,3 +15,10 @@ export const pledgeLeft200TextElements = pledgeLeftTextElements.filter(element =
 export const backedFundTextElement = document.querySelector("[data-backed-fund")
 export const desiredFundTextElement = document.querySelector("[data-desired-fund]")
 export const totalBackersTextElement = document.querySelector("[data-total-backers]")
+
+export const progressElement = document.querySelector("progress")
+
+export const continueHandlers = [...document.querySelectorAll("[data-fund]")]
+
+export const openModalButtons = document.querySelectorAll("[data-open-modal]")
+export const closeModalButtons = document.querySelectorAll("[data-close-modal]")

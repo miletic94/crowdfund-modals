@@ -56,7 +56,7 @@
           A beautiful & handcrafted monitor stand to reduce neck and eye strain.
         </p>
         <div class="btn-group width-100">
-          <button value="pledge-0" class="btn-primary" onclick="openModal(event, 'selection-modal')">
+          <button data-open-modal value="pledge-0" class="btn-primary">
             Back this project
           </button>
           <button id="bookmark" class="btn-secondary" onclick="toggleBookmark()">
@@ -111,7 +111,9 @@
           to allow notepads, pens, and USB sticks to be stored under the stand.
         </p>
         <div class="options">
-          <div data-pledge-left-parent class="option-card">
+          <div data-pledge-left-parent
+
+               class="option-card">
             <div class="option-card-header">
               <h3>
                 Bamboo Stand
@@ -133,7 +135,7 @@
                   left
                 </span>
               </div>
-              <button value="pledge-25" class="btn-primary" onclick="openModal(event, 'selection-modal')">
+              <button data-open-modal value="pledge-25" class="btn-primary">
                 Select Reward
               </button>
             </div>
@@ -161,7 +163,7 @@
                   left
                 </span>
               </div>
-              <button value="pledge-75" class="btn-primary" onclick="openModal(event, 'selection-modal')">
+              <button data-open-modal value="pledge-75" class="btn-primary">
                 Select Reward
               </button>
             </div>
@@ -189,7 +191,7 @@
                   left
                 </span>
               </div>
-              <button value="pledge-200" class="btn-primary" onclick="openModal(event, 'selection-modal')">
+              <button data-open-modal value="pledge-200" class="btn-primary">
                 Out of Stock
               </button>
             </div>
@@ -201,7 +203,7 @@
 
       
       <div class="modal selection-modal">
-        <img class="close-modal" src="images/icon-close-modal.svg" alt="close modal" onclick="closeModal()" />
+        <img data-close-modal class="close-modal" src="images/icon-close-modal.svg" alt="close modal" />
         <!-- Selection modal start -->
           <h1>
             Back this project
@@ -210,17 +212,23 @@
             Want to support us in bringing Mastercraft Bamboo Monitor Riser out in the world?
           </p>
       
-          <label for="pledge-0" class="modal-option-card">
+          <label data-pledge-left-parent 
+                    data-outline-checked="true"     
+                    for="pledge-0" 
+                    class="modal-option-card">
+
             <input id="pledge-0" class="modal-option-radio" 
                    type="radio" name="pledge-type" 
-                   onclick="styleCheckedLabel(event.target)" />
+                   data-input-outline="true" />
 
             <div class="modal-option-header">
               <h2>
                 Pledge with no reward
               </h2>
               <aside>
+                <span data-pledge-left="Infinity">
 
+                </span>
               </aside>
             </div>
             <div class="modal-option-left">
@@ -235,9 +243,9 @@
               </div>
               <div class="btn-group">
                 <div>
-                  <input type="number" data-pledge-input-0 value="0" placeholder/>
+                  <input data-pledge-input="0" type="number" data-pledge-input-0 value="0" placeholder/>
                 </div>
-                <button class="btn-primary continue-handler">
+                <button data-fund="0" class="btn-primary">
                   Continue
                 </button>
               </div>
@@ -245,12 +253,13 @@
             </div>
           </label>
 
-          <label data-pledge-left-parent for="pledge-25" class="modal-option-card">
+          <label data-pledge-left-parent 
+                  data-outline-checked="true" 
+                  for="pledge-25" class="modal-option-card">
             <input id="pledge-25" 
                    class="modal-option-radio" 
                    type="radio" 
                    name="pledge-type" 
-                   onclick="styleCheckedLabel(event.target)"
                    />
 
             <div class="modal-option-header">
@@ -278,9 +287,9 @@
               </div>
               <div class="btn-group">
                 <div>
-                  <input type="number" data-pledge-input-25 value="25" placeholder/>
+                  <input data-pledge-input="25" type="number" data-pledge-input-25 value="25" placeholder/>
                 </div>
-                <button class="btn-primary continue-handler">
+                <button data-fund="25" class="btn-primary">
                   Continue
                 </button>
               </div>
@@ -288,12 +297,13 @@
             </div>
           </label>
           
-          <label data-pledge-left-parent for="pledge-75" class="modal-option-card">
+          <label data-pledge-left-parent 
+                data-outline-checked="true"  
+                for="pledge-75" class="modal-option-card">
             <input id="pledge-75" 
                    class="modal-option-radio" 
                    type="radio" 
-                   name="pledge-type" 
-                   onclick="styleCheckedLabel(event.target)"/>
+                   name="pledge-type" />
 
             <div class="modal-option-header">
               <h2>
@@ -323,9 +333,9 @@
               </div>
               <div class="btn-group">
                 <div>
-                  <input type="number" data-pledge-input-75 value="75" placeholder/>
+                  <input data-pledge-input="75" type="number" data-pledge-input-75 value="75" placeholder/>
                 </div>
-                <button class="btn-primary continue-handler">
+                <button data-fund="75" class="btn-primary">
                   Continue
                 </button>
               </div>
@@ -333,8 +343,15 @@
             </div>
           </label>
 
-          <label data-pledge-left-parent for="pledge-200" class="modal-option-card disabled">
-            <input id="pledge-200" class="modal-option-radio" type="radio" name="pledge-type" disabled/>
+          <label data-pledge-left-parent 
+                data-outline-checked="true"
+                for="pledge-200" 
+                class="modal-option-card disabled">
+            <input id="pledge-200" 
+                  class="modal-option-radio" 
+                  type="radio" 
+                  name="pledge-type" disabled
+                  data-input-outline="false"/>
             <div class="modal-option-header">
               <h2>
                 Mahogany Special Edition
@@ -360,9 +377,9 @@
               </div>
               <div class="btn-group">
                 <div>
-                  <input type="number" data-pledge-input-200 value="200" placeholder/>
+                  <input data-pledge-input="200" type="number" data-pledge-input-200 value="200" placeholder/>
                 </div>
-                <button class="btn-primary continue-handler">
+                <button data-fund="200" class="btn-primary">
                   Continue
                 </button>
               </div>
@@ -424,7 +441,7 @@
           Your pledge brings us one step closer to sharing Mastercraft Bamboo Monitor Riser worldwide. You will get
           an email once our campaign is completed.
         </p>
-        <button class="btn-primary" onclick="closeModal()">
+        <button data-close-modal class="btn-primary">
           Got it!
         </button>
       </div>
@@ -439,9 +456,8 @@
     <!-- <script type="module" src="scripts/consts.js"></script> -->
     <script src="scripts/toggleBookmark.js"></script>
     <script src="scripts/toggleDropdown.js"></script>
-    <script src="scripts/toggleModal.js"> </script>
+    <script type="module" src="scripts/toggleModal.js"> </script>
     <script type="module" src="scripts/fundingTracker.js"></script>
-    <script type="module" src="scripts/validateInput.js"></script>
   </div>
 </body>
 </html>
