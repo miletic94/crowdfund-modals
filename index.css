@@ -66,7 +66,7 @@ table {
 
 nav {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     position: relative;
     align-items: center;
     height: 128px;
@@ -245,7 +245,9 @@ section.padding-bottom-0 {
 .option-card-footer {
     align-items: center;
 }
-
+.option-card-footer .summary-number {
+    margin-right: 0.8rem;
+}
 .modal-container {
     position: fixed;
     top: 0;
@@ -301,11 +303,11 @@ label:hover {
 
 .modal-option-card {
     display: grid;
-    grid-template-areas: "modal-option-radio    modal-option-header        modal-option-left"
-                         "modal-option-radio    modal-option-paragraph     modal-option-paragraph"
-                         "selected-pledge       selected-pledge            selected-pledge";
-
-    padding: 3.2rem 2.4rem;
+    grid-template-areas: "modal-option-radio    modal-option-header    modal-option-header        modal-option-left"
+                         "modal-option-radio    modal-option-paragraph modal-option-paragraph     modal-option-paragraph"
+                         "selected-pledge       selected-pledge        selected-pledge            selected-pledge";
+   grid-template-columns: auto;
+   padding: 3.2rem 2.4rem;
     border: 1px solid rgba(0, 0, 0, 0.05);
     margin: 1.2rem 0;
 }
@@ -317,8 +319,12 @@ label:hover {
     grid-area: modal-option-header;
     display: grid;
     grid-auto-flow: column;
-    align-items: center;
+    align-items: baseline;
     justify-content: space-between;
+    width: fit-content
+}
+.modal-option-header aside {
+    margin-left: 1.7rem;
 }
 .modal-option-paragraph {
     grid-area: modal-option-paragraph;
@@ -477,6 +483,16 @@ button {
     line-height: 2.8rem;
 }
 
+.modal-option-header aside {
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 2rem;
+}
+.modal-option-header h2 {
+    text-align: left;
+}
+
 .summary-number-small {
     font-size: 1.8rem;
     font-weight: 700;
@@ -559,6 +575,12 @@ button, a {
 .selected-pledge div {
     color: var(--text-color-light)
 }
+.modal-option-header aside {
+    color: var(--primary-color);
+}
+.modal-option-card:hover:not(.disabled) h2 {
+    color: var(--primary-color);
+}
 
 /* Toggle Bookmark button */
 .green {
@@ -622,6 +644,9 @@ button, a {
     .menu {
         display:none; 
     }
+    main {
+        padding: 0 2.4rem;
+    }
     section {
         padding: 2.4rem;
     }
@@ -643,7 +668,7 @@ button, a {
     }
     #bookmark {
         padding: 0;
-        width: 56px; /* widht of child icon */
+        width: 56px; /* width of child icon */
         height: 56px;
     }
     #bookmark div {
@@ -669,5 +694,44 @@ button, a {
     }
     .option-card-footer > div {
         margin-bottom: 2.4rem;
+    }
+
+    /* Modal */
+    .modal-option-header {
+        grid-auto-flow: row;
+    }
+    .modal-option-card {
+        /* grid-template-columns: auto; */
+        grid-template-areas: "modal-option-radio        modal-option-header        modal-option-header" 
+                             "modal-option-paragraph    modal-option-paragraph     modal-option-paragraph"
+                             "modal-option-left         modal-option-left          modal-option-left"                     
+                             "selected-pledge       selected-pledge                selected-pledge";
+        justify-content: center;
+    }
+    .modal-option-card input[type="radio"] {
+        margin:0;
+        align-self: center;
+    }
+    .modal-option-left {
+        justify-self: left;
+        align-items: center;
+        margin-top: 2.4rem;
+    }
+    .summary-number-small {
+        padding: 0;
+        margin-right: 0.8rem;
+    }
+    .modal-option-header aside {
+        margin-left: 0;
+    }
+    .modal-option-header h2, .modal-option-header aside {
+        font-size: 1.4rem;
+        font-weight: 700;
+        line-height: 1.7rem;
+    }
+    .selected-pledge{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 }

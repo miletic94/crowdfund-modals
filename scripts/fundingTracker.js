@@ -20,7 +20,6 @@ class FundingTracker {
         this.#pledgeLeft25 = 0
         this.#pledgeLeft75 = 0
         this.#pledgeLeft200 = 0
-        this.#backedFund = 0
     }
 
     set pledgeLeft25(ammount) {
@@ -148,7 +147,7 @@ class FundingTracker {
     }
 }
 
-let fundingTracker = new FundingTracker(1000, 0, 5007)
+let fundingTracker = new FundingTracker(100000, 89914, 5007)
 fundingTracker.pledgeLeft25 = 101
 fundingTracker.pledgeLeft75 = 64
 fundingTracker.pledgeLeft200 = 0
