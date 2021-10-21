@@ -161,13 +161,11 @@ section > img {
     margin-top: -4.8rem /* Annulate section padding of 48 */
 }
 .btn-group {
-
+    margin-top: 16px;
     display: flex;
     justify-content: space-between;
 }
-.btn-group {
-    margin-top: 16px;
-}
+
 .align-center {
     display:flex;
     align-items: center;
@@ -270,12 +268,18 @@ section.padding-bottom-0 {
     position: relative;
 }
 .close-modal {
-    position:absolute;
-    top: 32px;
-    right: 32px;
+    position:relative;
+    align-self: flex-end;
+    margin: 0 4vw 1vh 0
+    /* top: 20px; */
+    /* right: 32px; */
     cursor:pointer;
 }
+.close-modal img {
+    position: fixed;
+}
 .selection-modal {
+    position: relative;
     display: none;
     justify-content: space-between;
     max-width: 730px;
@@ -365,15 +369,24 @@ label:hover {
     position:relative;
     left: 2.4rem;
 }
+
+.selected-pledge .btn-group > div {
+    display: flex;
+    align-items: center;
+    height: calc(4.8rem - 4px);
+}
+
 .selected-pledge input {
+    box-sizing: border-box;
     width: 100%;
     max-width: 100px;
-    height: 4.8rem;
+    height: 100%;
     margin-right: 0.8rem;
+    padding-left: 30%;
     border-radius: 3.33rem;
     border: solid 1px var(--primary-color);
     outline:none;
-    text-align: center;
+    text-align: left    ;
 }
 
 
@@ -525,7 +538,7 @@ button {
 /* Buttons */
 button {
     border-radius: 56px;
-    padding: 17px 40px;
+    padding: 1.7rem 2.7vw;
     outline: 0;
     border: 0;
 }
@@ -645,7 +658,8 @@ button, a {
         display:none; 
     }
     main {
-        padding: 0 2.4rem;
+        padding: 0 6.4vw;
+        margin: 0 4.3vw;
     }
     section {
         padding: 2.4rem;
@@ -700,16 +714,25 @@ button, a {
     .modal-option-header {
         grid-auto-flow: row;
     }
+    .selection-modal {
+        margin: 0 5vw;
+        padding: 10vw;
+        height: calc(100% - 50px) ;
+    }
+    .success-modal {
+        margin: 0 5vw;
+    }
     .modal-option-card {
-        /* grid-template-columns: auto; */
+        grid-template-columns: min-content;
         grid-template-areas: "modal-option-radio        modal-option-header        modal-option-header" 
                              "modal-option-paragraph    modal-option-paragraph     modal-option-paragraph"
                              "modal-option-left         modal-option-left          modal-option-left"                     
                              "selected-pledge       selected-pledge                selected-pledge";
         justify-content: center;
+        padding: 5vh 6.4vw;
     }
     .modal-option-card input[type="radio"] {
-        margin:0;
+        margin-right: 6vw;
         align-self: center;
     }
     .modal-option-left {
@@ -730,8 +753,16 @@ button, a {
         line-height: 1.7rem;
     }
     .selected-pledge{
-        display: flex;
         flex-direction: column;
         align-items: center;
+    }
+    .selected-pledge input {
+        width: unset
+    }
+}
+
+@media screen and (max-height: 600px) {
+    main {
+        transform: translateY(-8%);
     }
 }
