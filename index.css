@@ -270,7 +270,7 @@ section.padding-bottom-0 {
 .close-modal {
     position:relative;
     align-self: flex-end;
-    margin: 0 4vw 1vh 0
+    margin: 0 4vw 1vh 0;
     /* top: 20px; */
     /* right: 32px; */
     cursor:pointer;
