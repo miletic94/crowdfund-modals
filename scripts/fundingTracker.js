@@ -36,30 +36,35 @@ class FundingTracker {
     }
 
     fundProject(pledgeType, ammount) {
-        if(this.isNotFunded()) {
-            console.log(this.isNotFunded())
-            this.fundingExecuted = false
-            if(this.minmaxChecker(pledgeType)) {
-                this.pledgeReward(pledgeType)
-                this.addToFund(parseInt(ammount))
-                this.updateTotalBackersNumber()
-                this.updateProgressElementValue(progressElement)
-                this.fundingExecuted = true
-            }
+        this.fundingExecuted = false
+
+        if(this.isFunded()) {
+            alert("Project is already funded. Thank you for support.")
             return
         }
-        console.log("Project is already funded. Thank you for support.")
+        if(this.willBeOverfunded(ammount)) {
+            alert(`Ammount is too big. You will overfund project. Wee need $${this.desiredFund - this.backedFund} more`)
+            return
+        }
+
+        if(this.minmaxChecker(pledgeType)) {
+            this.pledgeReward(pledgeType)
+            this.addToFund(parseInt(ammount))
+            this.updateTotalBackersNumber()
+            this.updateProgressElementValue(progressElement)
+            this.fundingExecuted = true
+        }
     }
     minmaxChecker(pledgeType) {
         let pledgeInputElement = document.querySelector(`[data-pledge-input='${pledgeType}']`)
         const min = parseInt(pledgeType)
         const pledgeInputValue = parseInt(pledgeInputElement.value)
         if(pledgeInputValue <= 0) {
-            console.log("Not possible value. Please, try somethinig else")
+            alert("Not possible value. Please, try somethinig else")
             return false
         }
         if (pledgeInputValue < min) {
-            console.log(`Pledge too small for this reward. You should try other type of pledge`)
+            alert(`Pledge too small for this reward. You should try other type of pledge`)
             return false
         }
         return true
@@ -107,14 +112,16 @@ class FundingTracker {
         this.#totalBackers = amount 
     }
 
-    isNotFunded() {
-       return this.backedFund < this.desiredFund
-        
+    isFunded() {
+       return this.backedFund === this.desiredFund   
+    }
+    willBeOverfunded(ammount) {
+        return this.#backedFund + parseInt(ammount) > this.#desiredFund
     }
 
     addToFund(ammount) {
         if(this.backedFund + parseInt(ammount) > this.desiredFund) {
-            console.log(`Ammount is too big. You will overfund project. Wee need $${this.desiredFund - this.backedFund} more`)
+            alert(`Ammount is too big. You will overfund project. Wee need $${this.desiredFund - this.backedFund} more`)
             return
         }
         this.#backedFund += parseInt(ammount)

@@ -55,9 +55,3 @@ checkedParentElement.forEach(element => {
         })
     }
 })
-
-continueHandlers.forEach(continueHandler => {
-    continueHandler.addEventListener("click", (event) => {
-        
-    })
-})
